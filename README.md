@@ -4,7 +4,7 @@
 
 > ARAM is a personal project, installed via direct install / OTA — it is not on the App Store.
 
-![Main screen](images/main-walnut.png)
+![ARAM in Minimal Dark](images/main-minimal-dark.png)
 
 ---
 
@@ -40,6 +40,8 @@ The interface is styled as a piece of studio hardware: a brushed-aluminum facepl
 - **Top bar**: track list, mixer, note editor, songs, pad-mode, theme, dark/light, keys, plugin window, and SETUP.
 
 On iPhone the same engine runs with a compact layout: in landscape the arranger fills the screen with a slim control strip, and the knob deck slides up as an overlay.
+
+![iPhone landscape](images/phone-landscape.png)
 
 ## 2. Tracks and sounds
 
@@ -104,13 +106,9 @@ Audio clips get waveforms in the arranger and support the same move / trim / spl
 - **Tap** empty space to add a note (grid-length), **drag** to move, drag the **right edge** to resize, **double-tap** to delete.
 - Velocity slider for the selected note; live playhead while playing.
 
-![Piano roll](images/piano-roll.png)
-
 ## 9. The mixer
 
-**MIXER** opens a full-screen console: one color-coded strip per track with fader, pan, mute, **solo**, live VU, instrument and FX shortcuts — plus a master strip with the main output fader and master VU. Faders stay in lockstep with hardware controller faders.
-
-![Mixer](images/mixer.png)
+**MIXER** opens a full-screen console: one color-coded strip per track with fader, pan, mute, **solo**, live VU, instrument and FX shortcuts — plus a master strip with the main output fader and master VU. Faders stay in lockstep with hardware controller faders. The mixer — like every window and sheet — follows the loaded theme.
 
 ## 10. Pad modes
 
@@ -141,8 +139,6 @@ A computer keyboard (Smart Folio etc.) is also a control surface — see [shortc
 ## 12. Arturia MiniLab 37
 
 The deepest integration besides the KeyLab itself. **One-time setup: put the unit in DAW mode** — hold **Shift** and press **Pad 3 ("Prog")** until the MiniLab's display reads **DAW**.
-
-![MiniLab 37 pad colors](images/pad-colors.png)
 
 ### Controls
 
@@ -175,14 +171,16 @@ The MiniLab's screen mirrors what you're doing: the browsed/loaded sound at rest
 
 SETUP → **Display**:
 
-- **Theme** — six finishes: **Oak**, **Walnut** (default), **Keystage** (space black), **White**, **MiniLab White**, and **MiniLab Black** (the last two match the MiniLab 37 hardware, down to the ice-blue accent).
-- **White knob LEDs** — switch the teal LED rings (knobs, wheel, playhead glow) to white.
+- **Theme** — eight finishes: **Minimal Dark** (the factory default — true OLED black, hairlines and ink only), **Minimal** (flat warm paper), **Walnut**, **Oak**, **Keystage** (space black), **White**, **MiniLab White**, and **MiniLab Black** (the MiniLab pair matches the Arturia hardware, down to the ice-blue accent).
+- **White knob LEDs** (default on) — or switch the LED rings (knobs, wheel, playhead glow) back to teal.
 - **Dark / light mode** and arranger-on-top layout from the top bar.
+- Every floating window and settings sheet follows the loaded theme.
 - Optional: auto-switch to the Keystage theme when a Keystage connects.
 
 | | |
 |---|---|
-| ![MiniLab White theme](images/theme-minilab-white.png) | ![MiniLab Black theme](images/theme-minilab-black.png) |
+| ![Walnut theme](images/theme-walnut.png) | ![MiniLab White theme](images/theme-minilab-white.png) |
+| ![MiniLab Black theme](images/theme-minilab-black.png) | ![ARAM in Minimal Dark](images/main-minimal-dark.png) |
 
 ## 14. Songs
 
@@ -228,4 +226,4 @@ With a hardware keyboard attached (main ones):
 
 ---
 
-*Manual for ARAM v4.0 · updated 2026-07-13.*
+*Manual for ARAM v4.0 · updated 2026-07-13. Screenshots: iPad Pro 11″ + iPhone simulators.*
