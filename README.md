@@ -1,8 +1,8 @@
-# KEYLAB — User Manual
+# ARAM — User Manual
 
-**KEYLAB** (project name *AUSeq*) is a native iPad **audio + MIDI DAW and AUv3 plugin host**, designed around hardware MIDI controllers — with first-class support for the Arturia KeyLab mkII 88, **Arturia MiniLab 37**, Korg Keystage, Novation Launchkey Mini, and the PreSonus ioStation 24c. It runs on iPad (best on iPad Pro 11") and iPhone.
+**ARAM** (formerly ARAM; project name *AUSeq*) is a native iPad **audio + MIDI DAW and AUv3 plugin host**, designed around hardware MIDI controllers — with first-class support for the Arturia KeyLab mkII 88, **Arturia MiniLab 37**, Korg Keystage, Novation Launchkey Mini, and the PreSonus ioStation 24c. It runs on iPad (best on iPad Pro 11") and iPhone.
 
-> KEYLAB is a personal project, installed via direct install / OTA — it is not on the App Store.
+> ARAM is a personal project, installed via direct install / OTA — it is not on the App Store.
 
 ![Main screen](images/main-walnut.png)
 
@@ -43,7 +43,7 @@ On iPhone the same engine runs with a compact layout: in landscape the arranger 
 
 ## 2. Tracks and sounds
 
-Every track hosts an **AUv3 instrument** (or holds **audio clips** — see [Recording audio](#6-recording-audio)). KEYLAB ships with two built-in plugins so a fresh install makes sound immediately:
+Every track hosts an **AUv3 instrument** (or holds **audio clips** — see [Recording audio](#6-recording-audio)). ARAM ships with two built-in plugins so a fresh install makes sound immediately:
 
 - **Juno-60** — a Roland Juno-60 style synth, auto-loaded on new tracks.
 - **Singularity** — a deep-space reverb (Eventide Blackhole-inspired), available as a per-track FX insert.
@@ -75,10 +75,10 @@ The big wheel with the round screen is the sound browser:
 
 ## 5. Capture MIDI — the "I just played something" button
 
-KEYLAB is **always listening** (like Ableton Live's Capture): every note you play is kept in a rolling 2-minute buffer, whether or not you were recording.
+ARAM is **always listening** (like Ableton Live's Capture): every note you play is kept in a rolling 2-minute buffer, whether or not you were recording.
 
 - Press **CAPTURE** (waveform+ icon) after noodling something good:
-  - **From silence** (empty song, stopped): KEYLAB detects the tempo and bar count, creates the loop, and starts it rolling.
+  - **From silence** (empty song, stopped): ARAM detects the tempo and bar count, creates the loop, and starts it rolling.
   - **Over a running loop**: your notes are added as an overdub, in time.
 
 ## 6. Recording audio
@@ -126,7 +126,7 @@ The 16-pad surface (hardware pads on the KeyLab/Launchkey/MiniLab + on-screen) h
 
 ## 11. Controllers
 
-KEYLAB auto-detects controllers when they're plugged in (USB) — no setup screens:
+ARAM auto-detects controllers when they're plugged in (USB) — no setup screens:
 
 - **Arturia KeyLab mkII 88** (the app's namesake): full MCU integration — 9 encoders with bank paging, 9 faders → volumes/master, select buttons with LEDs, transport, preset stepping, the LCD mirrors the app, and the 16 RGB pads run the pad modes.
 - **Arturia MiniLab 37** — see the [full section below](#12-arturia-minilab-37).
@@ -221,11 +221,11 @@ With a hardware keyboard attached (main ones):
 ## 17. Troubleshooting
 
 - **A controller does nothing** → check SETUP → Raw MIDI Monitor; if messages arrive, note the source name. MiniLab 37 must be in **DAW mode** (Shift+Pad 3).
-- **No third-party instruments listed** → the AUv3s must be installed with their host apps opened once; then rescan by reopening KEYLAB.
+- **No third-party instruments listed** → the AUv3s must be installed with their host apps opened once; then rescan by reopening ARAM.
 - **Audio dropouts** → out-of-process AUv3s are CPU-hungry; watch the CPU meter, and prefer fewer simultaneous heavy synths.
 - **All audio died after a call / Siri / unplugging headphones** → the engine auto-recovers; if a plugin stays silent, reload it from the track's plugin menu.
 - **Stuck notes** → the **PANIC** button (far left of the transport) releases everything.
 
 ---
 
-*Manual for KEYLAB v4.0 · updated 2026-07-12.*
+*Manual for ARAM v4.0 · updated 2026-07-13.*
