@@ -1,6 +1,6 @@
 # ARAM — User Manual
 
-**ARAM** (formerly ARAM; project name *AUSeq*) is a native iPad **audio + MIDI DAW and AUv3 plugin host**, designed around hardware MIDI controllers — with first-class support for the Arturia KeyLab mkII 88, **Arturia MiniLab 37**, Korg Keystage, Novation Launchkey Mini, and the PreSonus ioStation 24c. It runs on iPad (best on iPad Pro 11") and iPhone.
+**ARAM** (formerly KEYLAB; project name *AUSeq*) is a native iPad **audio + MIDI DAW and AUv3 plugin host**, designed around hardware MIDI controllers — with first-class support for the Arturia KeyLab mkII 88, **Arturia MiniLab 37**, Korg Keystage, Novation Launchkey Mini, and the PreSonus ioStation 24c. It runs on iPad (best on iPad Pro 11") and iPhone.
 
 > ARAM is a personal project, installed via direct install / OTA — it is not on the App Store.
 
