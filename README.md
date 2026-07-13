@@ -41,7 +41,7 @@ The interface is styled as a piece of studio hardware: a brushed-aluminum facepl
 
 On iPhone the same engine runs with a compact layout: in landscape the arranger fills the screen with a slim control strip, and the knob deck slides up as an overlay.
 
-![iPhone landscape](images/phone-landscape.png)
+![ARAM on iPhone (portrait)](images/phone-portrait.png)
 
 ## 2. Tracks and sounds
 
