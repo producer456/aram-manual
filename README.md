@@ -27,6 +27,7 @@
 15. [Configuration and diagnostics](#15-configuration-and-diagnostics)
 16. [Keyboard shortcuts](#16-keyboard-shortcuts)
 17. [Troubleshooting](#17-troubleshooting)
+18. [ARAM on iPhone](#18-aram-on-iphone)
 
 ---
 
@@ -39,9 +40,7 @@ The interface is styled as a piece of studio hardware: a brushed-aluminum facepl
 - **Bottom — the transport bar**: Panic · Stop · Play · Record · Capture · REC AUDIO · REC IN · quantize tools · tempo.
 - **Top bar**: track list, mixer, note editor, songs, pad-mode, theme, dark/light, keys, plugin window, and SETUP.
 
-On iPhone the same engine runs with a compact layout: in landscape the arranger fills the screen with a slim control strip, and the knob deck slides up as an overlay.
-
-![ARAM on iPhone (portrait)](images/phone-portrait.png)
+ARAM also runs on iPhone with a compact layout — see [ARAM on iPhone](#18-aram-on-iphone).
 
 ## 2. Tracks and sounds
 
@@ -223,6 +222,15 @@ With a hardware keyboard attached (main ones):
 - **Audio dropouts** → out-of-process AUv3s are CPU-hungry; watch the CPU meter, and prefer fewer simultaneous heavy synths.
 - **All audio died after a call / Siri / unplugging headphones** → the engine auto-recovers; if a plugin stays silent, reload it from the track's plugin menu.
 - **Stuck notes** → the **PANIC** button (far left of the transport) releases everything.
+
+## 18. ARAM on iPhone
+
+The full engine runs on iPhone with a layout built for the smaller screen:
+
+- **Portrait**: the arranger on top, with a compact control strip and the (smaller) sound browser wheel below; the on-screen piano is available here.
+- **Landscape**: the arranger fills the screen with one slim control strip — track list, compact transport, the loaded plugin's icon (tap to open its window), KNOBS (slide-up knob deck + wheel), pad mode, and MORE.
+
+![ARAM on iPhone (portrait)](images/phone-portrait.png)
 
 ---
 
