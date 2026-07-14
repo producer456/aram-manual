@@ -4,7 +4,7 @@
 
 > ARAM is a personal project, installed via direct install / OTA — it is not on the App Store.
 
-![ARAM in Minimal Dark](images/main-minimal-dark.png)
+![ARAM — Minimal theme, mid-session](images/main.png)
 
 ---
 
