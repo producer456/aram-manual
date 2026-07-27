@@ -1,6 +1,6 @@
 # ARAM — User Manual
 
-**ARAM** (formerly KEYLAB; project name *AUSeq*) is a native iPad **audio + MIDI DAW and AUv3 plugin host**, designed around hardware MIDI controllers — with first-class support for the Arturia KeyLab mkII 88, **Arturia MiniLab 37**, Korg Keystage, Novation Launchkey Mini, and the PreSonus ioStation 24c. It runs on iPad (best on iPad Pro 11") and iPhone.
+**ARAM** (formerly KEYLAB; project name *AUSeq*) is a native iPad **audio + MIDI DAW and AUv3 plugin host**, designed around hardware MIDI controllers — with first-class support for the **Arturia MiniLab 37** and Arturia KeyLab mkII 88, plus the Korg Keystage, Novation Launchkey Mini, PreSonus ioStation 24c, and Midiplus X3 mini. It runs on iPad (best on iPad Pro 11"), iPhone, and **Apple Silicon Macs**.
 
 > ARAM is a personal project, installed via direct install / OTA — it is not on the App Store.
 
@@ -49,7 +49,7 @@ Every track hosts an **AUv3 instrument** (or holds **audio clips** — see [Reco
 - **Juno-60** — a Roland Juno-60 style synth, auto-loaded on new tracks.
 - **Singularity** — a deep-space reverb (Eventide Blackhole-inspired), available as a per-track FX insert.
 
-Any AUv3 instrument or effect installed on the iPad shows up too (AUM/Audiobus-style hosting, out-of-process). Each track has one optional **FX insert** between the instrument and its mixer channel.
+Any AUv3 instrument or effect installed on the iPad shows up too (AUM/Audiobus-style hosting, out-of-process). Each track has an **FX chain** between the instrument and its mixer channel: add as many effects as you like, drag to reorder them in signal order, open or remove any insert — and FX parameters can be automated just like instrument knobs.
 
 - **Add a track**: the + in the track list — or in TRACKS pad mode, just **tap an empty pad**.
 - **Select a track**: tap its lane header, or press its pad in TRACKS mode.
@@ -68,7 +68,9 @@ The big wheel with the round screen is the sound browser:
 
 1. Select a track (it auto-arms).
 2. Press **Record** — the transport starts with a count-in and records what you play (on-screen keys, any MIDI keyboard, drum pads, or the computer keyboard in piano mode).
-3. The loop plays back and you can **overdub** on further passes.
+3. Recording is **open-ended, like tape**: the song grows for as long as you play — there's no bar count to set up front. Set a **loop region** on the ruler first if you want to loop-record instead; passes over the loop **overdub** by default.
+
+Playback timing is sample-accurate: notes are scheduled ahead to exact sample positions with **per-plugin latency compensation**, so heavy synths land on the grid alongside light ones.
 
 **Quantize** lives in the transport bar: auto-quantize on record, apply-to-selection, and re-quantize. The grid (Bar … 1/16T) also sets snapping for clip editing. Recording drums with auto-quantize on won't double-trigger hits — a hit that snaps ahead of the playhead is not replayed in the same pass.
 
@@ -97,6 +99,8 @@ Audio clips get waveforms in the arranger and support the same move / trim / spl
 - **Drag the ruler** to set the **loop region** — the loop band doubles as the *edit range* for Cut / Copy / Erase / Paste (ONE track or ALL tracks scope).
 - **Clips**: drag the middle to **move**, drag an edge to **trim**, **split** at the playhead, cut/copy/paste. Timing snaps to the quantize grid.
 - The timeline is a true arrangement: recording or dragging past the end grows the song.
+- **Duplicate** a selected clip in place (×1/×2/×4) from its menu; **zoom presets** jump between overview and detail; tracks can be **reordered** from the track list or lane header.
+- **Undo is descriptive** — the toast (and controller screens) name what was undone ("Undid · Move clip").
 
 ## 8. The piano roll
 
@@ -111,7 +115,7 @@ Audio clips get waveforms in the arranger and support the same move / trim / spl
 
 ## 10. Pad modes
 
-The 16-pad surface (hardware pads on the KeyLab/Launchkey/MiniLab + on-screen) has **five modes**, cycled with the pad-mode button (or a long-press of the MiniLab 37's encoder):
+The 16-pad surface (hardware pads on the KeyLab/Launchkey/MiniLab + on-screen) has **seven modes**, cycled with the pad-mode button (or a long-press of the MiniLab 37's encoder):
 
 | Mode | Pads show | Pressing a pad |
 |---|---|---|
@@ -120,6 +124,8 @@ The 16-pad surface (hardware pads on the KeyLab/Launchkey/MiniLab + on-screen) h
 | **DRUM** | dim track color | plays/records drum notes (36+) with velocity |
 | **VU** | per-track level meters in track colors | — |
 | **LOOP** | pads = bars 1–16; amber band = loop region; white = playing bar | tap = move the loop (keeps length); **hold one pad + tap another** = loop exactly those bars |
+| **PERFORM** | pastel control pads (2×4) | Track ▲▼ · Preset ▲▼ / Stop · Play · Record (**hold = Capture**) · Metro (**hold = quantize take**) |
+| **MUTE** | one pad per track, red when muted | toggles the track's mute |
 
 ## 11. Controllers
 
@@ -132,6 +138,10 @@ ARAM auto-detects controllers when they're plugged in (USB) — no setup screens
 - **Novation Launchkey Mini 37 MK4** — pads (RGB-mirrored), knobs → params, knob 8 browses, transport, preset up/down, OLED feedback.
 - **PreSonus ioStation 24c** — FaderPort surface: motor fader follows the selected track (or master), encoder = pan / playhead, arm/solo/mute, full transport with LED feedback. Also the preferred **audio interface** for REC IN.
 - **Arturia KeyLab 88 mk1** — supported via a MIDI Control Center template (enable "KeyLab 88 mk1 mode" in SETUP; setup card included in-app).
+- **Midiplus X3 mini** — works out of the box: the six buttons (factory MMC mode) drive the transport with **◀◀/▶▶ stepping presets**; knobs = volume · pan · **cutoff** · **resonance** (the filter pair is found by name on whatever synth is loaded).
+- **Any keyboard with MMC transport buttons** gets working transport for free — MMC is handled no matter what the port is called. And anything else can be wired up by hand with [MIDI Learn](#midi-learn--map-anything).
+
+ARAM also sends **MIDI clock** (24 PPQN) to connected Arturia hardware, so an on-keyboard arpeggiator set to external sync locks to the song.
 
 A computer keyboard (Smart Folio etc.) is also a control surface — see [shortcuts](#16-keyboard-shortcuts).
 
@@ -166,6 +176,15 @@ SETUP → **MiniLab 37 → Pad colors** gives every pad its own color. Custom co
 
 The MiniLab's screen mirrors what you're doing: the browsed/loaded sound at rest, knob and fader value bars while you tweak, preset names when stepping, and confirmations for bank/mode/metronome/quantize actions.
 
+## MIDI Learn — map anything
+
+SETUP → **MIDI Learn — map anything**: tap an action, wiggle a control on your device, bound. Any knob, fader, pad, button — even the **sustain pedal** — can drive any of ~40 actions: transport, undo/redo/panic, track/preset navigation, cutoff & resonance, param knobs, and the whole mixer.
+
+- **Your binding wins** — it deliberately overrides what the built-in driver did with that control, on that device only (bindings are per-port).
+- A **Custom bindings** toggle turns the whole map on and off instantly; learning still works while it's off.
+- Bindings **save with the song** and restore when it loads — each song can carry its own control setup.
+- Swipe a row to unbind; one-shots fire on the press, knobs/faders/pitch-bend feed continuous targets.
+
 ## 13. Themes and appearance
 
 SETUP → **Display**:
@@ -174,6 +193,7 @@ SETUP → **Display**:
 - **White knob LEDs** (default on) — or switch the LED rings (knobs, wheel, playhead glow) back to teal.
 - **Dark / light mode** and arranger-on-top layout from the top bar.
 - Every floating window and settings sheet follows the loaded theme.
+- **The theme saves with the song** — loading a song restores the look it was made in.
 - Optional: auto-switch to the Keystage theme when a Keystage connects.
 
 | | |
@@ -183,7 +203,9 @@ SETUP → **Display**:
 
 ## 14. Songs
 
-**SONGS** manages a library of named songs (saved as JSON in the app's Documents): Save / Save As / New, tap to load, swipe to rename or delete. A song stores everything — instruments *and their full patch state*, FX, notes, automation, mixer, tempo, loop.
+**SONGS** manages a library of named songs: Save / Save As / New, tap to load, swipe to rename or delete. A song stores everything — instruments *and their full patch state*, the FX chain, notes, automation, mixer, tempo, loop, the theme it was made in, and its MIDI Learn bindings.
+
+Songs live in **iCloud Drive** (visible in the Files app under the ARAM folder), so they sync across devices and survive anything that happens to one iPad; without iCloud they fall back to local Documents, also exposed in Files for easy backup.
 
 ## 15. Configuration and diagnostics
 
@@ -222,6 +244,10 @@ With a hardware keyboard attached (main ones):
 - **Audio dropouts** → out-of-process AUv3s are CPU-hungry; watch the CPU meter, and prefer fewer simultaneous heavy synths.
 - **All audio died after a call / Siri / unplugging headphones** → the engine auto-recovers; if a plugin stays silent, reload it from the track's plugin menu.
 - **Stuck notes** → the **PANIC** button (far left of the transport) releases everything.
+
+## ARAM on the Mac
+
+The full app runs natively on **Apple Silicon Macs** (it's the real iOS app, "Designed for iPad"): the same songs, plugins, controllers over USB, and audio engine, installed from a drag-to-Applications DMG. Songs sync through the same iCloud library, so a song started on the iPad opens on the Mac.
 
 ## 18. ARAM on iPhone
 
