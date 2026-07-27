@@ -261,3 +261,7 @@ The full engine runs on iPhone with a layout built for the smaller screen:
 ---
 
 *Manual for ARAM v4.0 · updated 2026-07-13. Screenshots: iPad Pro 11″ + iPhone simulators.*
+
+---
+
+<sub>[·](workstation.html)</sub>

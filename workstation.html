@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ARAM · W</title>
+<style>
+  :root { --ink:#e8e6e0; --dim:#8a877f; --line:rgba(255,255,255,.14); --accent:#ffb454; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#000; color:var(--ink); font:16px/1.65 ui-monospace, "SF Mono", Menlo, monospace;
+         min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding:8vh 20px 60px; }
+  .card { max-width:680px; width:100%; }
+  h1 { font-size:22px; letter-spacing:.35em; font-weight:500; border-bottom:1px solid var(--line); padding-bottom:14px; }
+  h1 .ws { color:var(--accent); }
+  h2 { font-size:13px; letter-spacing:.25em; text-transform:uppercase; color:var(--dim); margin:34px 0 10px;
+       border-bottom:1px solid var(--line); padding-bottom:6px; }
+  p, ul, table { margin:14px 0; font-size:15px; }
+  .tagline { color:var(--dim); }
+  a { color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(255,180,84,.35); }
+  ul { padding-left:20px; } li { margin:6px 0; }
+  table { border-collapse:collapse; width:100%; }
+  td { border-top:1px solid var(--line); padding:9px 12px 9px 0; vertical-align:top; font-size:15px; }
+  td:first-child { white-space:nowrap; color:var(--accent); padding-right:18px; }
+  code { color:var(--accent); font-size:13px; }
+  .fine { color:var(--dim); font-size:13px; border-top:1px solid var(--line); padding-top:14px; margin-top:30px; }
+  /* gate */
+  #gate { text-align:center; padding-top:16vh; }
+  #gate h1 { display:inline-block; border:none; }
+  #gate p { color:var(--dim); font-size:13px; letter-spacing:.2em; }
+  #pw { background:#000; border:1px solid var(--line); color:var(--ink); font:inherit; letter-spacing:.5em;
+        text-align:center; padding:12px 16px; width:220px; margin-top:18px; outline:none; border-radius:2px; }
+  #pw:focus { border-color:var(--accent); }
+  #msg { height:20px; margin-top:10px; color:#d06060; font-size:12px; letter-spacing:.15em; }
+  #content { display:none; }
+</style></head><body>
+<div class="card">
+  <div id="gate">
+    <h1>A R A M</h1>
+    <p>ENTER CODE</p>
+    <input id="pw" type="password" inputmode="numeric" autocomplete="off" autofocus>
+    <div id="msg"></div>
+  </div>
+  <div id="content"></div>
+</div>
+<script>
+const BLOB = {"s": "Ik6j5/pmKd6kuo2cOv6YHA==", "n": "GVhJ03yl1NWpTFM8", "c": "FvkVPkRzNFsUZzizxxAmq/YiuPOb0YBRGwKq2OGM9K/gxv/hZf7LxBpzRS0lB//PeLbtxhWb4qd1/uaYpaXnkrbtX/GgfB6RhznGqKNirpOSDhpwmeX7FES27Hv7f/8/y6E5jocjMlROL6B0ul0ugSeJ9j0gx7sX8Tov+8f1fiH7P0J8AHX+mVxQTYHSYZjUBCcSrVc1kXQOXRcYNy5xXWp4lDVLxxh2rbRhtSmVFQw+le5lIzNhufAC7p/Ba3ubR2hz2Q0ZU0kC/f+3aYV5kfVut3sUoz/rkggHvP8rcICkgqvmhTJezsOnSY5ON9pj62RrFUjGeut+oN5sLb5cH1M+2zoSk7x6HlMHG+s5dZ5CglNQwg9cIGrYO+5H6KJTa/ryL6IVG4E4QbeyYtBpqK/DdQtD8CESHDOIGntUsQD3GOBOy3jVA15c0Y9fXJmP7OmUo5faoOsDG2xt1+PyJku//ri10wJfuV+Whm3WKAabFnO8odM4hTVB/jkH2C0sED89udwUSLEGgMpUtT/ezIwhh1Pu4FJFnqPq1pdHLi26fFP+OA29ftoPEut1YNMMMm9iavCWBEDGAX38A+uW+UTHL+6DXHIbsVYRwgRD/vAhJ9YclAtFDQfyFyPqoTr+K4spNph62P5xXvDiLQ60t0T002nObRkZDkPxCvDg9hKihpxqb255jc6n/PCrWqlungNqEjPFglePptnhMqMPXdIWNCRRZGbpFS/BQIkFCZ+OQTt/8N4qJzDk/ovj7dquKyS+QgNXFSSFtiwJqJjkDepFc5IDT6DGrmrhSpAfBfzZJZZ4wwTXZnyHRIr3CDH4dMlvOPjR6/0eRgSk0M4pap3miUtqJe/xWsDitffGYkkXNXfnt+ojNhIDFaLky8gwAxzbMf62Evl2BdkS4fHYr20m/JDaXTLiIdrk45Lg7UtMQ3nh04fOdtYN0BNS02DsO/i2w0ERBtbP62b6qQ+giF81YiJxe4o9h7OHIgmcqHqDNKLHVq6kzvnwubhfptKMK9Q9+eJnXOqvoyAfghm151WPOf0SIwy6QmAN995eh2AkRnS2fEeXclNoU50U7mmOOQakc3JBfUtgVTi6Sq0AZeIq8RA+H5owD3vITkXUEBDRgyaM2RNcCsb1Hi7G0qIg2c2dnj6iqtClwR9ZFCAW8aTwFMxtdegCooLvu5KkcFGOH94qNSRCnz0tR2/3NLYBlhuEVVXcnsY5kAnVquCCjtAVJnM5uYlY0HyZ8tm7gMisIp7ateMavMAe6qL2D3pRVzDsHYkAafP14ZGAfGErOkzFX6+/MmdqnbfzgtV5uajrpmT/sHjDLfuKaV0WvWCk4tof3mtq8WR4bV/5u7Q0ZG7xD8Nx47UFX63W3kEl/WKDRyNG7Mwfr0ETMrTb/Ttgsr06FqerwVJQMUzAg+VOQpyH94JoVMn0vdGryWEWwjHZhW8dTieyL47QfAOZnqQo5Ih0LeBbIZfI+LKPgE62/4UbHuLn/DUR2/FV9QKS30z3cuUKdKzbX64N7tIvzwyq9RscjBTXbYdICp3TMcEouZ0s3lkfMmT3GibfVbrqcstb7THhBglJZqEpDxnXxkT4pOkxx9utUoj5iDV8QnMPYLSoIq6BuyOoowN/9qPXFVmUKqGEdlDa85ra3Q1HjLt6r4jS4h5CBmSHdJIYxjl2p2cBuF7zKuO++WSQ0Gor8nm4R2+2uvLMclAQ3RkEoceAxtZWZk8q+6K3DS36cDYd75IFVUY9mqCumonZGx+zuwxyU45BPxAbMxHdKtlRtx3n0d39A6btn+zOY+r6bOgA2PubxzCen2iMyQsmKGBDoF0h6kmqUep3d2El9j9kWSn0d96XvDoVpT4NRHDVVHl1fR7m+RGnwxOYNXQJuNK4/Sjr5gms3aKaP1tR/jAV2j2IZhtxKOsgGvM//o/CbqaL1zeuU703hTp+op8ZFnbL2AXxiWM4zuKBTDJSRNg5VN0Bo9pIYz5ySgegwfKHGziHickSxI6guuglUkq8UL8mrXcQ1eUBVaL6Gtlvdl3BeVd0h7MP4LWm9EF2+8nzDhYKzM2wg2V0hEbBTkSXTMH5kO8BmbzTeAozvL6QzpiN/c/ItvwKiSYMIztbt8SGivPwVZX1MV4HLVB5RnFG09v6uwY0nQtq6jLghTz+zdTdPHkzof353DXhgp7rKDqUGykTYjLrueaP/5iVXN1BW9Esj7P1UACZeMawvB7NBdpvt4N6YMOwz4m2LgoVkk0zKf/Eywb6M8TPQdS1HdHUAQ/BRC+UcOv8lyxOjjXvTL9cJEy5zM56ovh/TkKB7/GoK0IJIfN42vMwRPi+l9rbX3XJPGa9HULZRvrJ5FC/lrg8SXZDjp8dY7JfqeyYAecc6s/hKOxsnx9I4vhXdS1Tzz8YAiG6v9YshRdpbFG3gEXSQieEx0nVDVwqKjVcQxGGeb+wTfbq5y7MBaSxszLvuhvK+PNvRye2x3NuNtJOb/3p6SBS7LDFy547YmuVJ3Zx9Oe5gqo44CfWfMcR577jTrHC61ZwIWJASJvgkVKjSzytmaT5YhJBQ9y8wWLVDR3ik2THSOBorbZELD3+d93JyUlJ9Kfd25ZrrZM1EhTc11+pNFCT5qCcYAgOIwHag+o/FfbP3sZw5Q+7cPYgMsSsfOg6G4GTjP6OkT3TfLTAplhdmnxvOuHwq/jxxJuL82Cz1J45e6el56ZejrRzqHa+VZhzLXYmEQaybnulcgwORfQScwAdkyqWyXc1J5dyRLnjUImgUa6pVLS5EHdq/oWgIxyJL2hr+4a1Itdv21Q0L99LQkrDoxg3tTUbKxPqdiZlRLxvMCRXTYfsjG6T5M9U0f2YxU0tSxJ2oGkuctDeT5mqWAYOIyVPSo/XZUtI+SPK4YnNwomO7ofG11hAjstcQdne/aeyJYzbx2G0PBR9SN+W48snGQrUzP8YakzCn8MEJ0zNQh+xXJDnZhK3W2Xk1/zJzupJFGAIisIa+LWOJ4m/SHv+E+0BRG8fNtTrjvjpuJc0Z3ytBBhuCVYP"};
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function tryUnlock(pass) {
+  const enc = new TextEncoder();
+  const km = await crypto.subtle.importKey("raw", enc.encode(pass), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name:"PBKDF2", salt:b64(BLOB.s), iterations:600000, hash:"SHA-256" },
+    km, { name:"AES-GCM", length:256 }, false, ["decrypt"]);
+  const pt = await crypto.subtle.decrypt({ name:"AES-GCM", iv:b64(BLOB.n) }, key, b64(BLOB.c));
+  return new TextDecoder().decode(pt);
+}
+const pw = document.getElementById("pw"), msg = document.getElementById("msg");
+pw.addEventListener("keydown", async e => {
+  if (e.key !== "Enter") return;
+  msg.textContent = "…";
+  try {
+    const html = await tryUnlock(pw.value);
+    document.getElementById("gate").style.display = "none";
+    const c = document.getElementById("content");
+    c.innerHTML = html; c.style.display = "block";
+    sessionStorage.setItem("aramw", pw.value);
+  } catch { msg.textContent = "NO"; pw.value = ""; }
+});
+const saved = sessionStorage.getItem("aramw");
+if (saved) { pw.value = saved; pw.dispatchEvent(new KeyboardEvent("keydown", {key:"Enter"})); }
+</script></body></html>
