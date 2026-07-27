@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARAM — iPad DAW</title>
+<style>
+:root{--bg:#000;--panel:#0d0d0d;--ink:#e0e0de;--dim:#8a8a86;--accent:#f6f9ff;--line:rgba(255,255,255,.14);--code:#101010}
+:root[data-theme="light"]{--bg:#f2efe6;--panel:#e9e5d9;--ink:#242426;--dim:#6f6a60;--accent:#242426;--line:rgba(0,0,0,.16);--code:#e8e4d8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,'SF Pro Text',Segoe UI,Roboto,sans-serif}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+header h1{font-size:17px;letter-spacing:6px;font-weight:600}
+header h1 a{text-decoration:none}
+#search{flex:1;min-width:160px;max-width:340px;background:var(--code);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 12px;font-size:14px;outline:none}
+#search:focus{border-color:var(--accent)}
+#mode{background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:14px}
+#mode:hover{border-color:var(--accent)}
+.wrap{display:flex;max-width:1200px;margin:0 auto}
+nav{width:230px;flex-shrink:0;padding:24px 8px 60px 20px;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
+nav a{display:block;color:var(--dim);padding:5px 10px;border-radius:6px;font-size:14px;text-decoration:none}
+nav a:hover,nav a.here{color:var(--ink);background:var(--panel)}
+nav .grp{color:var(--dim);opacity:.6;font-size:11px;letter-spacing:2px;margin:16px 0 4px 10px}
+main{flex:1;padding:28px 24px 120px;min-width:0}
+section{margin-bottom:44px;scroll-margin-top:80px}
+h2{font-size:22px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:16px;margin:20px 0 6px;color:var(--accent)}
+p,li{color:var(--ink);opacity:.92;font-size:15px}
+ul{padding-left:22px;margin:8px 0}
+kbd{background:var(--code);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 7px;font-size:12.5px;font-family:'SF Mono',Menlo,monospace;color:var(--accent);white-space:nowrap}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--dim);font-weight:600;letter-spacing:1px;font-size:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.tip{border-left:3px solid var(--accent);padding-left:14px;margin:12px 0;color:var(--dim);font-size:14px}
+.shot{width:100%;border-radius:12px;border:1px solid var(--line);margin:10px 0;display:block}
+.shot-cap{color:var(--dim);font-size:12.5px;text-align:center;margin:-4px 0 10px}
+.hidden{display:none!important}
+footer{color:var(--dim);opacity:.7;font-size:12px;text-align:center;padding:30px}
+.hero{text-align:center;padding:26px 0 6px}
+.hero h2{font-size:40px;letter-spacing:.4em;border:none;font-weight:500;padding-left:.4em}
+.hero p{color:var(--dim);font-size:17px;margin:6px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:20px 0}
+.grid>div{background:var(--bg);padding:16px 18px}
+.grid b{display:block;margin-bottom:4px;letter-spacing:.05em}
+.grid span{color:var(--dim);font-size:14px;line-height:1.55}
+.thumbs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.thumbs figure{margin:0}
+.thumbs img{width:100%;border:1px solid var(--line);border-radius:10px;display:block}
+.thumbs figcaption{color:var(--dim);font-size:12.5px;text-align:center;margin-top:4px}
+@media(max-width:820px){nav{display:none}.wrap{display:block}.thumbs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1><a href="#overview">A R A M</a></h1>
+  <button id="mode" title="Light / dark">☀︎</button>
+  <input id="search" placeholder="Search the manual…" oninput="doSearch(this.value)">
+</header>
+<div class="wrap">
+<nav id="nav">
+  <div class="grp">START</div>
+  <a href="#overview">Overview</a><a href="#screen">The Main Screen</a><a href="#tracks">Tracks &amp; Sounds</a>
+  <div class="grp">SEQUENCING</div>
+  <a href="#recording">Recording MIDI</a><a href="#capture">Capture</a><a href="#audio">Recording Audio</a><a href="#arranger">The Arranger</a><a href="#pianoroll">Piano Roll</a>
+  <div class="grp">SOUND</div>
+  <a href="#wheel">The Browser Wheel</a><a href="#fx">FX &amp; Mixer</a><a href="#automation">Automation</a>
+  <div class="grp">PERFORM</div>
+  <a href="#pads">Pad Modes</a><a href="#themes">Themes</a><a href="#midilearn">MIDI Learn</a>
+  <div class="grp">HARDWARE</div>
+  <a href="#controllers">Controllers</a><a href="#minilab">MiniLab 37</a>
+  <div class="grp">REFERENCE</div>
+  <a href="#songs">Songs &amp; iCloud</a><a href="#shortcuts">Shortcuts</a><a href="#setup">Setup &amp; Diagnostics</a><a href="#trouble">Troubleshooting</a><a href="#iphone">On iPhone</a><a href="#mac">On the Mac</a><a href="workstation.html">Workstation ·</a>
+</nav>
+<main id="main">
+
+<section id="overview">
+<div class="hero">
+  <h2>A R A M</h2>
+  <p>A recording studio that thinks it's a piece of hardware.<br>iPad · iPhone · Apple&nbsp;Silicon Mac</p>
+</div>
+<img class="shot" src="images/main.png" alt="ARAM mid-session">
+<div class="grid">
+  <div><b>Plays like tape</b><span>Hit record and play — the song grows as long as you do. No bar counts, no project setup, no click unless you ask for one.</span></div>
+  <div><b>Always listening</b><span>Noodled something good before you hit record? CAPTURE turns the last thing you played into a rolling loop — tempo detected.</span></div>
+  <div><b>Hardware first</b><span>Plug in a MiniLab, KeyLab, Keystage, Launchkey — screens, LEDs and encoders just light up and work. Or map anything to anything with MIDI Learn.</span></div>
+  <div><b>Sound out of the box</b><span>A Juno-60-style synth and a deep-space reverb ship built in, plus every AUv3 on your iPad, hosted with per-plugin latency compensation.</span></div>
+  <div><b>A real DAW</b><span>Multitrack MIDI + audio, waveform clips, FX chains, automation, a mixer, a piano roll — sample-accurate, on a timeline that grows to fit.</span></div>
+  <div><b>Yours everywhere</b><span>Songs live in iCloud and open on iPad, iPhone and Mac — each one remembers its theme and control bindings too.</span></div>
+</div>
+<p class="tip">ARAM is a personal project, installed directly — it is not on the App Store.</p>
+</section>
+
+<section id="screen"><h2>The Main Screen</h2>
+<p>The interface is a piece of studio hardware: a faceplate with physical-looking knobs and LED rings, a big browser wheel with a round screen, and a dark "OLED" arranger.</p>
+<ul>
+<li><b>Left / center — the arranger</b>: zoomable multi-track timeline with MIDI and audio clips, playhead, and the loop band on the ruler.</li>
+<li><b>Right — the control deck</b>: the sound-browser wheel, eight parameter knobs bound to the selected track's instrument, and utility buttons.</li>
+<li><b>Bottom — transport</b>: Panic · Stop · Play · Record · Capture · REC&nbsp;AUDIO · REC&nbsp;IN · quantize · tempo.</li>
+</ul></section>
+
+<section id="tracks"><h2>Tracks &amp; Sounds</h2>
+<p>Every track hosts an <b>AUv3 instrument</b> or holds audio clips. Two plugins ship built in, so a fresh install makes sound immediately: the <b>Juno-60</b> (auto-loaded on new tracks) and <b>Singularity</b>, a deep-space reverb. Every AUv3 instrument and effect installed on the device appears too, hosted out-of-process.</p>
+<ul>
+<li><b>Add a track</b>: the + in the track list — or tap an empty pad in TRACKS pad mode.</li>
+<li><b>Per-track</b>: volume, pan, mute, solo, record-arm, live VU in the header.</li>
+</ul></section>
+
+<section id="recording"><h2>Recording MIDI</h2>
+<ul>
+<li>Select a track (it auto-arms), press <kbd>Record</kbd> — count-in, then everything you play is recorded.</li>
+<li>Recording is <b>open-ended, like tape</b> — the song grows for as long as you play. Set a loop region first to loop-record instead; passes overdub.</li>
+<li><b>Quantize</b>: auto-quantize on record, apply-to-selection, re-quantize; the grid also drives edit snapping.</li>
+</ul>
+<p class="tip">Playback is sample-accurate: notes are scheduled ahead to exact sample positions with per-plugin latency compensation — heavy synths land on the grid alongside light ones.</p></section>
+
+<section id="capture"><h2>Capture — the "I just played something" button</h2>
+<p>ARAM keeps a rolling two-minute buffer of everything you play, recording or not. Press <kbd>CAPTURE</kbd> after noodling something good:</p>
+<ul>
+<li><b>From silence</b>: tempo and bar count detected, loop created, already rolling.</li>
+<li><b>Over a running loop</b>: your notes drop in as an overdub, in time.</li>
+</ul></section>
+
+<section id="audio"><h2>Recording Audio</h2>
+<ul>
+<li><b>REC AUDIO</b> — bounce the synths: per-track WAV stems + the master mix, dropped onto a new audio track at the right beat.</li>
+<li><b>REC IN</b> — record the mic or a USB interface (auto-preferred when connected) to a new audio track.</li>
+</ul>
+<p>Audio clips get waveforms and the same non-destructive move / trim / split / copy / paste as MIDI clips.</p></section>
+
+<section id="arranger"><h2>The Arranger</h2>
+<ul>
+<li><b>Pinch</b> to zoom (axis-aware), one-finger pan, tap to place the playhead.</li>
+<li><b>Drag the ruler</b> for the loop region — it doubles as the edit range for Cut / Copy / Erase / Paste (ONE or ALL tracks).</li>
+<li><b>Clips</b>: tap to select, then drag to move, edge-drag to trim; split at the playhead; <b>Dup</b> ×1/×2/×4; zoom presets; track reorder.</li>
+<li>The timeline is a true arrangement — recording or dragging past the end grows the song.</li>
+<li><b>Undo is descriptive</b> — the toast names what it undid.</li>
+</ul></section>
+
+<section id="pianoroll"><h2>Piano Roll</h2>
+<p><kbd>NOTES</kbd> opens a floating, resizable editor for the selected track: tap to add, drag to move, edge-drag to resize, double-tap to delete, velocity slider, live playhead.</p></section>
+
+<section id="wheel"><h2>The Browser Wheel</h2>
+<ul>
+<li><b>Drag</b> (or turn a hardware encoder) to browse instruments — icon and name on the round screen.</li>
+<li><b>Tap</b> (or click the encoder) to load onto the selected track; "loaded" confirms.</li>
+<li>Browse away and it snaps back to the loaded sound after ~4s, like a hardware menu timeout.</li>
+</ul></section>
+
+<section id="fx"><h2>FX Chains &amp; the Mixer</h2>
+<p>Each track has an <b>FX chain</b> between instrument and mixer: add effects, drag to reorder in signal order, open or remove any insert. <kbd>MIXER</kbd> opens a full console — fader, pan, mute, solo, live VU per strip, master strip with main fader — locked in step with hardware faders.</p></section>
+
+<section id="automation"><h2>Automation</h2>
+<p>Arm <kbd>AUTO</kbd>, press play, turn knobs — moves are recorded and replayed. Each track header's curve menu shows a parameter lane on the track; draw on it to edit. FX parameters automate too.</p></section>
+
+<section id="pads"><h2>Pad Modes</h2>
+<p>The 16-pad surface (hardware + on-screen) has seven modes:</p>
+<table><tr><th>Mode</th><th>Pads show</th><th>Pressing</th></tr>
+<tr><td><b>TRACKS</b></td><td>a pad per track in its color; brightness follows level</td><td>select — or empty pad = new track</td></tr>
+<tr><td><b>STEP</b></td><td>16 steps of the current bar</td><td>toggle the step</td></tr>
+<tr><td><b>DRUM</b></td><td>dim track color</td><td>play/record drums with velocity</td></tr>
+<tr><td><b>VU</b></td><td>per-track meters</td><td>—</td></tr>
+<tr><td><b>LOOP</b></td><td>pads = bars 1–16, amber = loop</td><td>move the loop; hold+tap = span bars</td></tr>
+<tr><td><b>PERFORM</b></td><td>pastel controls (2×4)</td><td>Track ▲▼ · Preset ▲▼ · Stop · Play · Record (hold = Capture) · Metro (hold = quantize)</td></tr>
+<tr><td><b>MUTE</b></td><td>a pad per track, red = muted</td><td>toggle mute</td></tr></table></section>
+
+<section id="themes"><h2>Themes</h2>
+<p>Eight finishes, from SETUP → Display. <b>Minimal Dark</b> is the factory default — true OLED black, hairlines and ink only. <b>The theme saves with each song</b> and comes back when it loads.</p>
+<div class="thumbs">
+  <figure><img src="images/theme-minimalDark.png" alt="Minimal Dark"><figcaption>Minimal Dark — the default</figcaption></figure>
+  <figure><img src="images/theme-minimal.png" alt="Minimal"><figcaption>Minimal</figcaption></figure>
+  <figure><img src="images/theme-walnut.png" alt="Walnut"><figcaption>Walnut</figcaption></figure>
+  <figure><img src="images/theme-oak.png" alt="Oak"><figcaption>Oak</figcaption></figure>
+  <figure><img src="images/theme-keystage.png" alt="Keystage"><figcaption>Keystage (space black)</figcaption></figure>
+  <figure><img src="images/theme-white.png" alt="White"><figcaption>White</figcaption></figure>
+  <figure><img src="images/theme-minilabWhite.png" alt="MiniLab White"><figcaption>MiniLab White</figcaption></figure>
+  <figure><img src="images/theme-minilabBlack.png" alt="MiniLab Black"><figcaption>MiniLab Black</figcaption></figure>
+</div></section>
+
+<section id="midilearn"><h2>MIDI Learn — map anything</h2>
+<p>SETUP → <b>MIDI Learn</b>: tap an action, wiggle a control, bound. Any knob, fader, pad, button — even the sustain pedal — can drive ~40 actions: transport, undo/redo/panic, navigation, cutoff &amp; resonance, param knobs, the whole mixer.</p>
+<ul>
+<li><b>Your binding wins</b> over the built-in driver for that control, on that device only.</li>
+<li>A master toggle turns the map on/off instantly.</li>
+<li><b>Bindings save with the song</b> — each song can carry its own control setup.</li>
+</ul></section>
+
+<section id="controllers"><h2>Controllers</h2>
+<p>Auto-detected on plug-in — no setup screens:</p>
+<ul>
+<li><b>Arturia MiniLab 37</b> — the deepest integration; see <a href="#minilab">below</a>.</li>
+<li><b>Arturia KeyLab mkII 88</b> — full MCU: encoders with banking, faders, select LEDs, transport, preset stepping, mirrored LCD, 16 RGB pads.</li>
+<li><b>Arturia MiniLab 3</b> — DAW-mode: encoders, faders, browse/load, transport, OLED + pad LEDs.</li>
+<li><b>Korg Keystage 49</b> — native mode with knob-OLED labels, transport, track/preset/bank nav.</li>
+<li><b>Novation Launchkey Mini 37 MK4</b> — pads, knobs, browse, transport, OLED feedback.</li>
+<li><b>PreSonus ioStation 24c</b> — motor-fader surface + the preferred audio interface.</li>
+<li><b>Arturia KeyLab 88 mk1</b> — via a MIDI Control Center template (setup card in-app).</li>
+<li><b>Midiplus X3 mini</b> — works out of the box: MMC buttons drive transport with ◀◀/▶▶ stepping presets; knobs = volume · pan · <b>cutoff</b> · <b>resonance</b>, matched by name on the loaded synth.</li>
+</ul>
+<p class="tip">Any keyboard with MMC transport buttons gets working transport for free — and ARAM sends MIDI clock so hardware arpeggiators lock to the song. A computer keyboard is a control surface too (<a href="#shortcuts">shortcuts</a>).</p></section>
+
+<section id="minilab"><h2>Arturia MiniLab 37</h2>
+<p>One-time setup: hold <kbd>Shift</kbd> + press <kbd>Pad 3</kbd> until the display reads <b>DAW</b>.</p>
+<table><tr><th>Control</th><th>Function</th></tr>
+<tr><td>Keybed / wheels</td><td>play the selected track</td></tr>
+<tr><td>8 knobs</td><td>selected track's params (banked); OLED shows name + value bar</td></tr>
+<tr><td>4 faders</td><td>track 1–4 volumes</td></tr>
+<tr><td>Encoder turn / click</td><td>browse / load sounds</td></tr>
+<tr><td>Encoder long-press</td><td>cycle pad mode</td></tr>
+<tr><td><kbd>Shift</kbd>+turn / click</td><td>step presets / page the knob bank</td></tr>
+<tr><td>Pads</td><td>the 16-pad surface (bank A/B via <kbd>Shift</kbd>+<kbd>Pad 2</kbd>)</td></tr>
+<tr><td><kbd>Shift</kbd>+Pads 4–8</td><td>Loop · Stop · Play · Record (hold = quantize take) · Tap (hold = metronome)</td></tr></table>
+<p>SETUP → MiniLab 37 → <b>Pad colors</b> paints every pad persistently — custom colors survive bank switches and transport lights. The OLED mirrors everything: sounds, knob and fader bars, preset names, confirmations.</p></section>
+
+<section id="songs"><h2>Songs &amp; iCloud</h2>
+<p><kbd>SONGS</kbd> manages the library: Save / Save As / New, tap to load, swipe to rename or delete. A song stores <i>everything</i> — instruments and their full patch state, FX chains, notes, automation, mixer, tempo, loop, its theme, and its MIDI Learn bindings.</p>
+<p>Songs live in <b>iCloud Drive</b> (visible in Files), sync across devices, and fall back to local Documents without iCloud.</p></section>
+
+<section id="shortcuts"><h2>Keyboard Shortcuts</h2>
+<table><tr><th>Key</th><th>Action</th></tr>
+<tr><td><kbd>Space</kbd></td><td>play / stop</td></tr>
+<tr><td><kbd>Return</kbd></td><td>return to start</td></tr>
+<tr><td><kbd>R</kbd></td><td>record</td></tr>
+<tr><td><kbd>I</kbd></td><td>Capture</td></tr>
+<tr><td><kbd>↑</kbd>/<kbd>↓</kbd></td><td>preset (with Shift: track)</td></tr>
+<tr><td><kbd>←</kbd>/<kbd>→</kbd></td><td>seek by bar</td></tr>
+<tr><td><kbd>N</kbd> <kbd>P</kbd> <kbd>M</kbd></td><td>new track · pad mode · metronome</td></tr>
+<tr><td><kbd>Z</kbd>/<kbd>⇧Z</kbd></td><td>undo / redo</td></tr>
+<tr><td>piano mode</td><td>play notes on the QWERTY rows</td></tr></table></section>
+
+<section id="setup"><h2>Setup &amp; Diagnostics</h2>
+<ul>
+<li><b>Display</b> — themes, LEDs, keep-awake, layout.</li>
+<li><b>MIDI Learn</b> — map anything; <b>Controller Learn</b> — guided capture; <b>Raw MIDI Monitor</b> — debug any controller.</li>
+<li><b>Plugins</b> — choose which AUv3s appear. <b>Audio</b> — recorded-takes browser. <b>Diagnostics</b> — live log with share.</li>
+</ul></section>
+
+<section id="trouble"><h2>Troubleshooting</h2>
+<ul>
+<li><b>Controller does nothing</b> → Raw MIDI Monitor; MiniLab 37 must be in DAW mode.</li>
+<li><b>No third-party instruments</b> → open their host apps once, then reopen ARAM.</li>
+<li><b>Dropouts</b> → out-of-process AUv3s are hungry; watch the CPU meter.</li>
+<li><b>Audio died after a call / route change</b> → the engine auto-recovers; reload a stuck plugin from its track menu.</li>
+<li><b>Stuck notes</b> → <kbd>PANIC</kbd>.</li>
+</ul></section>
+
+<section id="iphone"><h2>ARAM on iPhone</h2>
+<p>The full engine with a compact layout: portrait stacks the arranger over a control strip and wheel; landscape gives the arranger the whole screen with one slim strip.</p>
+<img class="shot" src="images/phone-landscape.png" alt="ARAM on iPhone, landscape">
+</section>
+
+<section id="mac"><h2>ARAM on the Mac</h2>
+<p>The real iOS app runs natively on Apple Silicon ("Designed for iPad") — same songs via iCloud, same plugins, controllers over USB — installed from a drag-to-Applications DMG.</p>
+<p class="tip">There is also <a href="workstation.html"><b>Aram Workstation</b></a> — the private edition with six synths built in. It asks for a code at the door.</p></section>
+
+</main>
+</div>
+<footer>ARAM · a personal project by David · <a href="workstation.html">·</a></footer>
+<script>
+function doSearch(q){q=q.trim().toLowerCase();
+document.querySelectorAll('main section').forEach(s=>{
+s.classList.toggle('hidden',q&&!s.textContent.toLowerCase().includes(q));});}
+const root=document.documentElement,btn=document.getElementById('mode');
+const apply=t=>{if(t==='light')root.setAttribute('data-theme','light');
+else root.removeAttribute('data-theme');
+btn.textContent=t==='light'?'☾':'☀︎';};
+apply(localStorage.getItem('aramTheme')||'dark');
+btn.onclick=()=>{const next=root.hasAttribute('data-theme')?'dark':'light';
+localStorage.setItem('aramTheme',next);apply(next);};
+const secs=[...document.querySelectorAll('main section')];
+const links=[...document.querySelectorAll('nav a')];
+addEventListener('scroll',()=>{let cur=secs[0];
+for(const s of secs){if(s.getBoundingClientRect().top<120)cur=s;}
+links.forEach(l=>l.classList.toggle('here',l.getAttribute('href')==='#'+cur.id));},{passive:true});
+</script>
+</body>
+</html>
