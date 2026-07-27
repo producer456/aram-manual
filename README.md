@@ -264,4 +264,6 @@ The full engine runs on iPhone with a layout built for the smaller screen:
 
 ---
 
-<sub>[·](workstation.html)</sub>
+## Aram Workstation
+
+There is also **[Aram Workstation](workstation.html)** — the private edition with six synths built in. It asks for a code at the door.

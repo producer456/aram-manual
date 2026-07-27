@@ -1,0 +1,5 @@
+title: ARAM
+description: iPad audio + MIDI DAW / AUv3 host, built around hardware controllers
+markdown: CommonMarkGhPages
+plugins:
+  - jekyll-commonmark-ghpages
