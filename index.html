@@ -89,6 +89,7 @@ footer{color:var(--dim);opacity:.7;font-size:12px;text-align:center;padding:30px
   <div><b>Hardware first</b><span>Plug in a MiniLab, KeyLab, Keystage, Launchkey — screens, LEDs and encoders just light up and work. Or map anything to anything with MIDI Learn.</span></div>
   <div><b>Sound out of the box</b><span>A Juno-60-style synth and a deep-space reverb ship built in, plus every AUv3 on your iPad, hosted with per-plugin latency compensation.</span></div>
   <div><b>A real DAW</b><span>Multitrack MIDI + audio, waveform clips, FX chains, automation, a mixer, a piano roll — sample-accurate, on a timeline that grows to fit.</span></div>
+  <div><b>Records like a console</b><span>Every track has an input — mic, interface channels, or the master bus — and one Record button records every armed track at once, aligned by measured latency.</span></div>
   <div><b>Yours everywhere</b><span>Songs live in iCloud and open on iPad, iPhone and Mac — each one remembers its theme and control bindings too.</span></div>
 </div>
 <p class="tip">ARAM is a personal project, installed directly — it is not on the App Store.</p>
@@ -125,10 +126,16 @@ footer{color:var(--dim);opacity:.7;font-size:12px;text-align:center;padding:30px
 </ul></section>
 
 <section id="audio"><h2>Recording Audio</h2>
+<h3>The console model</h3>
+<p>Every track has an <b>input</b>: MIDI for instrument tracks; for audio tracks, <b>Mic</b>, <b>Input 1</b>, <b>Input 2</b>, <b>Inputs 1–2</b> (stereo), or <b>Master</b> (resample the mix). Arm any combination and the <b>one Record button records them all at once</b> — a MIDI take on the synth, guitar on Input 1, vocal on Input 2, in the same pass, each landing on its own track, aligned and count-in-trimmed.</p>
 <ul>
-<li><b>REC AUDIO</b> — bounce the synths: per-track WAV stems + the master mix, dropped onto a new audio track at the right beat.</li>
-<li><b>REC IN</b> — record the mic or a USB interface (auto-preferred when connected) to a new audio track.</li>
+<li><b>Add an audio track</b>: the waveform-plus button in the Tracks sheet (it arrives armed, listening to the mic).</li>
+<li><b>Pick its input</b>: touch and hold the track → Input.</li>
+<li>Audio arms are independent toggles; instrument arm follows the selected track.</li>
+<li><b>REC AUDIO</b> and <b>REC IN</b> still work as one-tap shortcuts over the same machinery.</li>
 </ul>
+<h3>Latency calibration</h3>
+<p>SETUP → <b>Latency Calibration</b> plays five short sweeps and listens for them through your input, then stores the <i>measured</i> round-trip for that route — speaker→mic in a quiet room, or a cable loop on an interface for an exact reading. Every take on a calibrated route is aligned with the measurement instead of the system's estimate.</p>
 <p>Audio clips get waveforms and the same non-destructive move / trim / split / copy / paste as MIDI clips.</p>
 <h3>Voice to MIDI</h3>
 <p>Hum or whistle a line with <kbd>REC IN</kbd>, select the clip, tap <kbd>To MIDI</kbd> in the edit toolbar — the melody becomes real notes on your instrument track, snapped to the grid if auto-quantize is on. Deterministic pitch tracking, entirely on the device.</p></section>
